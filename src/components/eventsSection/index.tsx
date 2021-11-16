@@ -115,7 +115,7 @@ const EventsSection: React.FC<PropType> = ({ className = '' }) => {
               value={item.value}
               error={item.showError}
               onChange={e => handleUpdateEvent(e, index)}
-              helperText="Incorrect entry."
+              helperText={item.showError ? 'Incorrect entry.' : ''}
             />
 
             <span

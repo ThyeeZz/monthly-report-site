@@ -1,5 +1,6 @@
-import { createContext, useState } from 'react';
-import { TRootContext, TEmployee, TEvent } from '../../types';
+import React, { createContext, useState } from 'react';
+import { TRootContext, TEmployee, TEvent, TDialogConfig } from '../../types';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 
 const currentMonth = new Date().getMonth();
 export const rootContext = createContext<TRootContext>({
@@ -13,6 +14,8 @@ export const rootContext = createContext<TRootContext>({
   setBirthdayPerson: () => {},
   setAnniversaryPerson: () => {},
   setNewHeros: () => {},
+  openDialog: () => {},
+  closeDialog: () => {},
 });
 
 const RootProvider = (props: any) => {
@@ -21,8 +24,31 @@ const RootProvider = (props: any) => {
   const [birthdayPerson, setBirthdayPerson] = useState<TEmployee[]>([]);
   const [anniversaryPerson, setAnniversaryPerson] = useState<TEmployee[]>([]);
   const [newHeros, setNewHeros] = useState<TEmployee[]>([]);
+  const [dialogConfig, setDialogConfig] = useState<TDialogConfig>({
+    title: '',
+    open: false,
+    component: <></>,
+  });
+
+  const handleOpenDialog = (config: {
+    title?: string;
+    component: JSX.Element;
+  }) => {
+    setDialogConfig({
+      ...config,
+      open: true,
+    });
+  };
+  const handleCloseDialog = () => {
+    setDialogConfig({
+      title: '',
+      open: false,
+      component: <></>,
+    });
+  };
 
   const { Provider } = rootContext;
+  const { component: DialogComponent } = dialogConfig;
 
   return (
     <Provider
@@ -37,9 +63,15 @@ const RootProvider = (props: any) => {
         setBirthdayPerson,
         setAnniversaryPerson,
         setNewHeros,
+        openDialog: handleOpenDialog,
+        closeDialog: handleCloseDialog,
       }}
     >
       {props.children}
+      <Dialog open={dialogConfig.open} onClose={handleCloseDialog}>
+        {dialogConfig.title && <DialogTitle>{dialogConfig.title}</DialogTitle>}
+        <DialogContent>{DialogComponent}</DialogContent>
+      </Dialog>
     </Provider>
   );
 };

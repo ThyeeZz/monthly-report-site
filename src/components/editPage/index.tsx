@@ -5,6 +5,8 @@ import { useState, useContext } from 'react';
 import { rootContext } from '../rootContent';
 import EventsSection from '../eventsSection';
 import { TEvent, Months } from '../../types';
+import BirthdaySection from '../birthdaySection';
+import SectionTitleBar from '../sectionTitle';
 
 type PropsType = {
   className?: string;
@@ -18,8 +20,14 @@ const useStyles = makeStyles(() => ({
     border: '1px solid red',
     fontFamily: 'Roboto',
     padding: '64px',
+
+    '& .title': {
+      marginBottom: '40px',
+      fontWeight: 600,
+    },
   },
   eventsSectionContainer: {
+    marginBottom: '40px',
     '& .title': {
       marginBottom: '40px',
       fontWeight: 600,
@@ -52,23 +60,15 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
   return (
     <div className={`${classes.editPageConatiner} ${className}`}>
       <div className={classes.eventsSectionContainer}>
-        <h3 className="title">
-          {/* <InputLabel id="demo-simple-select-label">{`${month}`}</InputLabel> */}
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={month}
-            onChange={handleMonthChange}
-          >
-            {renderMonthOptions()}
-          </Select>
-          <span>大事记</span>
-        </h3>
+        <SectionTitleBar canSelect={true} month={month} setMonth={setMonth} />
 
         <EventsSection />
       </div>
 
-      <div className={classes.birthdaySection}></div>
+      <div className={classes.birthdaySection}>
+        <SectionTitleBar canSelect={false} month={month} />
+        <BirthdaySection />
+      </div>
 
       <div className={classes.anniversarySetion}></div>
 

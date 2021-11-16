@@ -1,3 +1,5 @@
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+
 export type TRootContext = {
   month: number;
   setMonth: React.Dispatch<React.SetStateAction<number>>;
@@ -9,6 +11,8 @@ export type TRootContext = {
   setBirthdayPerson: React.Dispatch<React.SetStateAction<TEmployee[]>>;
   setAnniversaryPerson: React.Dispatch<React.SetStateAction<TEmployee[]>>;
   setNewHeros: React.Dispatch<React.SetStateAction<TEmployee[]>>;
+  openDialog: (params: any) => void;
+  closeDialog: () => void;
 };
 
 export type TEmployee = {
@@ -17,9 +21,9 @@ export type TEmployee = {
   heroName: string;
   officePost: string;
   jobTitle?: string;
-  birthDate: string;
-  bordTime: string;
-  anniversary: number;
+  birthDate?: string;
+  bordTime?: string;
+  anniversary?: number;
 };
 
 export type TEvent = {
@@ -41,3 +45,9 @@ export enum Months {
   '十一月',
   '十二月',
 }
+
+export type TDialogConfig = {
+  title?: string;
+  open: boolean;
+  component: JSX.Element;
+};
