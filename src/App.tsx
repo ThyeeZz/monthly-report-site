@@ -1,7 +1,6 @@
 import './App.css';
-import { useScreenShot } from './hooks';
-import EditPage from './components/editPage';
-import PreviewPage from './components/previewPage';
+import EditPage from './pages/editPage';
+import PreviewPage from './pages/previewPage';
 import RootProvider from './components/rootContent';
 
 function App() {

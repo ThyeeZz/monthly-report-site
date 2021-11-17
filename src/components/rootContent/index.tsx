@@ -16,9 +16,12 @@ export const rootContext = createContext<TRootContext>({
   setNewHeros: () => {},
   openDialog: () => {},
   closeDialog: () => {},
+  previewEle: null!,
+  setPreviewEle: () => {},
 });
 
 const RootProvider = (props: any) => {
+  const [previewEle, setPreviewEle] = useState<HTMLElement>(null!);
   const [month, setMonth] = useState(currentMonth);
   const [events, setEvents] = useState<TEvent[]>([]);
   const [birthdayPerson, setBirthdayPerson] = useState<TEmployee[]>([]);
@@ -65,6 +68,8 @@ const RootProvider = (props: any) => {
         setNewHeros,
         openDialog: handleOpenDialog,
         closeDialog: handleCloseDialog,
+        previewEle,
+        setPreviewEle,
       }}
     >
       {props.children}

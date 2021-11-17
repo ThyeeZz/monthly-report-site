@@ -1,5 +1,9 @@
 @import './assets/css/reset.css';
+@import './assets/css/font.css';
 
 .App {
   display: flex;
+  font-family: 'Poppins', sans-serif;
+  max-width: 1440px;
+  margin: 0 auto;
 }

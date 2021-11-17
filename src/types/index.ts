@@ -13,6 +13,8 @@ export type TRootContext = {
   setNewHeros: React.Dispatch<React.SetStateAction<TEmployee[]>>;
   openDialog: (params: any) => void;
   closeDialog: () => void;
+  previewEle: HTMLElement;
+  setPreviewEle: React.Dispatch<HTMLElement>;
 };
 
 export type TEmployee = {
@@ -44,6 +46,21 @@ export enum Months {
   '十月',
   '十一月',
   '十二月',
+}
+
+export enum MonthsEn {
+  'Jan.',
+  'Feb.',
+  'Mar.',
+  'Apr.',
+  'May.',
+  'June.',
+  'July.',
+  'Aug.',
+  'Sept.',
+  'Oct.',
+  'Nov.',
+  'Dec.',
 }
 
 export type TDialogConfig = {
