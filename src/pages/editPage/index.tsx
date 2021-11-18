@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/styles';
-import { useState, useContext, useCallback } from 'react';
+import { makeStyles } from '@mui/styles';
+import { useState, useContext } from 'react';
 import { rootContext } from '../../components/rootContent';
 import { Months } from '../../types';
 import CommonEditSection from '../../components/comonEditSection';
@@ -9,6 +9,8 @@ import { MenuItem, Button } from '@mui/material';
 import EventsEditSection from '../../components/eventsEditSection';
 import { screenShoot } from '../../utils';
 import ReviewCotent from '../../components/dalogContentComp/reviewContent';
+import previewIcon from '../../assets/images/preview.svg';
+import { getMonthNumber } from '../../utils';
 
 type PropsType = {
   className?: string;
@@ -21,6 +23,8 @@ const useStyles = makeStyles(() => ({
     flex: 1,
     borderRight: '1px solid #ccc',
     padding: '64px',
+    minHeight: '100vh',
+    boxSizing: 'border-box',
   },
   monthSelector: {},
   sectionContainer: {
@@ -28,7 +32,6 @@ const useStyles = makeStyles(() => ({
     padding: '32px 0',
 
     '& .title': {
-      marginBottom: '40px',
       fontWeight: 700,
       fontSize: '24px',
       lineHeight: '32px',
@@ -36,12 +39,20 @@ const useStyles = makeStyles(() => ({
   },
   firstSection: {
     paddingTop: 0,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   btnsGroup: {
     marginTop: '40px',
 
     '& .previewBtn': {
       marginRight: '24px',
+
+      '& img': {
+        width: '20px',
+        marginLeft: '4px',
+      },
     },
   },
   containedBtn: {
@@ -73,7 +84,7 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
     const src = await screenShoot(previewEle);
 
     openDialog({
-      title: 'Preview Image',
+      title: 'Preview',
       component: <ReviewCotent src={src} month={Months[month]} />,
     });
   };
@@ -81,7 +92,9 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
   return (
     <section className={`${classes.editPageConatiner} ${className}`}>
       <div className={`${classes.sectionContainer} ${classes.firstSection}`}>
-        <InputLabel id="month-selector">选择月份</InputLabel>
+        <InputLabel id="month-selector" className="title">
+          选择月份
+        </InputLabel>
         <Select
           labelId="month-selector"
           value={String(month)}
@@ -92,33 +105,35 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
         </Select>
       </div>
       <div className={classes.sectionContainer}>
-        <h3 className="title">{Months[month]}大事记</h3>
-        <EventsEditSection />
+        <EventsEditSection
+          title={`${Months[getMonthNumber(month - 1)]}大事记`}
+        />
       </div>
 
       <div className={classes.sectionContainer}>
-        <h3 className="title">{Months[month]}寿星</h3>
-        <CommonEditSection keyWord="birthday" />
+        <CommonEditSection keyWord="birthday" title={`${Months[month]}寿星`} />
       </div>
 
       <div className={classes.sectionContainer}>
-        <h3 className="title">周年庆</h3>
-        <CommonEditSection keyWord="anniversary" />
+        <CommonEditSection keyWord="anniversary" title="周年庆" />
       </div>
 
       <div className={classes.sectionContainer}>
-        <h3 className="title">新英雄</h3>
-        <CommonEditSection keyWord="newHero" />
+        <CommonEditSection keyWord="newHero" title="新英雄" />
       </div>
 
       <div className={classes.btnsGroup}>
         <Button
-          variant="outlined"
+          variant="contained"
           className="previewBtn"
           onClick={handlePreview}
-        >
-          Preview
-        </Button>
+          children={
+            <>
+              <span>Preview</span>
+              <img src={previewIcon} alt="" />
+            </>
+          }
+        />
       </div>
     </section>
   );

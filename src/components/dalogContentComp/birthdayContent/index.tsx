@@ -1,7 +1,10 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import { TEmployee } from '../../../types';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
 
 const useStyles = makeStyles(() => ({
   dialogContent: {
@@ -36,7 +39,7 @@ const DialogComponent: React.FC<any> = ({
           heroName: '',
           officePost: '',
           jobTitle: '',
-          birthDate: '',
+          birthDate: new Date(),
         }
   );
 
@@ -53,6 +56,15 @@ const DialogComponent: React.FC<any> = ({
     key: string
   ) => {
     const { value } = e.target;
+    setCurrentEmployee(v => ({
+      ...v,
+      [key]: value,
+    }));
+  };
+  const handleUpdateSpacileInfo = (
+    value: string | null | undefined,
+    key: string
+  ) => {
     setCurrentEmployee(v => ({
       ...v,
       [key]: value,
@@ -79,7 +91,6 @@ const DialogComponent: React.FC<any> = ({
     root.setBirthdayPerson(templist);
     closeDialog();
   };
-  // console.log('currentEmployee---', currentEmployee);
   return (
     <div className={classes.dialogContent}>
       <div className={classes.fileUploader}>
@@ -115,12 +126,19 @@ const DialogComponent: React.FC<any> = ({
           value={currentEmployee.jobTitle}
           onChange={e => handleInputInfo(e, 'jobTitle')}
         />
-        <TextField
-          label="Birth Date"
-          fullWidth={true}
-          value={currentEmployee.birthDate}
-          onChange={e => handleInputInfo(e, 'birthDate')}
-        />
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Birth Date"
+            views={['month', 'day']}
+            value={currentEmployee.birthDate}
+            onChange={newValue => {
+              handleUpdateSpacileInfo(newValue, 'birthDate');
+            }}
+            renderInput={params => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        <br />
 
         <Button
           variant="contained"

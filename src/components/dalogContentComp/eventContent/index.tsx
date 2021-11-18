@@ -1,6 +1,8 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import { Button, TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useContext, SetStateAction } from 'react';
+import { rootContext } from '../../rootContent';
+import { TEvent } from '../../../types';
 
 const useStyles = makeStyles(() => ({
   dialogContent: {
@@ -20,14 +22,21 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const DialogComponent: React.FC<any> = ({
+type PropType = {
+  events: TEvent[];
+  setEvents: React.Dispatch<SetStateAction<TEvent[]>>;
+  modifyInfo?: { value: string; showError: boolean };
+  index?: number;
+};
+
+const DialogComponent: React.FC<PropType> = ({
   events,
   setEvents,
-  root,
   modifyInfo = null,
   index = null,
 }) => {
   const classes = useStyles();
+  const root = useContext(rootContext);
   const [currentEvent, setCurrentEvent] = useState<{
     value: string;
     showError: boolean;
@@ -50,13 +59,16 @@ const DialogComponent: React.FC<any> = ({
 
   const handleConfirm = () => {
     if (currentEvent.value.trim() === '') {
-      alert('please fill in current information');
+      setCurrentEvent(v => ({
+        ...v,
+        showError: true,
+      }));
       return;
     }
     const { closeDialog } = root;
     let templist = [...events];
     if (modifyInfo) {
-      templist.splice(index, 1, currentEvent);
+      templist.splice(index as number, 1, currentEvent);
     } else {
       templist = templist.concat(currentEvent);
     }
@@ -75,6 +87,9 @@ const DialogComponent: React.FC<any> = ({
           fullWidth={true}
           value={currentEvent.value}
           error={currentEvent.showError}
+          helperText={
+            currentEvent.showError ? 'Please complete information!' : ''
+          }
           onChange={handleChange}
         />
 

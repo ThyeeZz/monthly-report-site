@@ -1,8 +1,8 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import { Button } from '@mui/material';
 import { useState, useContext } from 'react';
 import { rootContext } from '../rootContent';
-import HighlightOffIcon from '@mui/icons-material/DoDisturbOnOutlined';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CreateIcon from '@mui/icons-material/Create';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { TEvent } from '../../types';
@@ -10,6 +10,7 @@ import DialogComponent from '../dalogContentComp/eventContent';
 
 type PropType = {
   className?: string;
+  title: string;
 };
 
 const useStyles = makeStyles(theme => ({
@@ -18,12 +19,11 @@ const useStyles = makeStyles(theme => ({
     fontSize: '24px',
     lineHeight: '32px',
   },
-  btnGroup: {
+  titleBar: {
     marginBottom: '40px',
-    '&>button:first-child': {
-      marginRight: '16px',
-      boxShadow: 'none !important',
-    },
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
   },
   eventsListWrapper: {
     '&>li': {
@@ -58,24 +58,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const EventsSection: React.FC<PropType> = ({ className = '' }) => {
+const EventsSection: React.FC<PropType> = ({ className = '', title }) => {
   const classes = useStyles();
   const root = useContext(rootContext);
 
   const [events, setEvents] = useState<TEvent[]>([]);
-
-  // const handleUpdateEvent = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  //   index: number
-  // ) => {
-  //   let tempList = [...events];
-  //   const newValue = {
-  //     value: e.target.value,
-  //     showError: false,
-  //   };
-  //   tempList.splice(index, 1, newValue);
-  //   setEvents(tempList);
-  // };
 
   const handleDeleteThisEvent = (index: number) => {
     let tempList = [...events];
@@ -88,9 +75,7 @@ const EventsSection: React.FC<PropType> = ({ className = '' }) => {
     const { openDialog } = root;
     openDialog({
       title: 'Add Event',
-      component: (
-        <DialogComponent events={events} setEvents={setEvents} root={root} />
-      ),
+      component: <DialogComponent events={events} setEvents={setEvents} />,
     });
   };
 
@@ -102,7 +87,6 @@ const EventsSection: React.FC<PropType> = ({ className = '' }) => {
         <DialogComponent
           events={events}
           setEvents={setEvents}
-          root={root}
           modifyInfo={item}
           index={index}
         />
@@ -110,23 +94,12 @@ const EventsSection: React.FC<PropType> = ({ className = '' }) => {
     });
   };
 
-  // const handlePreviewEvents = () => {
-  //   let tempList = events.map(item => ({
-  //     value: item.value,
-  //     showError: item.value.trim() === '',
-  //   }));
-  //   if (tempList.some(i => i.showError)) {
-  //     setEvents(tempList);
-  //     return;
-  //   }
-  //   root.setEvents(events);
-  // };
-
   return (
     <div className={`${classes.eventSection} ${className}`}>
-      <div className={classes.btnGroup}>
+      <div className={classes.titleBar}>
+        <h3 className="title">{title}</h3>
         <Button
-          variant="contained"
+          variant="outlined"
           onClick={handleAddEvents}
           endIcon={<AddCircleOutlineIcon />}
         >

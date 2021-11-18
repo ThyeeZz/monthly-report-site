@@ -1,10 +1,11 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import { rootContext } from '../../components/rootContent';
 import { useContext, useEffect, useRef } from 'react';
 import Avatar from '@mui/material/Avatar';
 import bg from '../../assets/images/background.png';
 import { MonthsEn, Months } from '../../types';
 import zilliz from '../../assets/images/zilliz.png';
+import { formatDate, getMonthNumber } from '../../utils';
 
 type PropsType = {
   className?: string;
@@ -56,7 +57,7 @@ const useStyles = makeStyles(() => ({
       fontWeight: 600,
       fontSize: '32px',
       lineHeight: '42px',
-      marginBottom: '20px',
+      marginBottom: '30px',
     },
   },
   footerSection: {
@@ -160,8 +161,8 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
     <section className={`${classes.previewPageConatiner} ${className}`}>
       <div className={classes.container} ref={previewEle}>
         <div className={classes.headerSection}>
-          <h1>{MonthsEn[month]}2021</h1>
-          <h2>{month + 1}月回顾</h2>
+          <h1>{MonthsEn[getMonthNumber(month - 1)]}2021</h1>
+          <h2>{getMonthNumber(month)}月回顾</h2>
         </div>
 
         <div className={classes.contentWrapper}>
@@ -199,7 +200,12 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
                     {item.jobTitle && (
                       <p className={classes.position}>{item.jobTitle}</p>
                     )}
-                    <p className={classes.specialInfo}>{item.birthDate}</p>
+                    <p className={classes.specialInfo}>
+                      {formatDate(
+                        item.birthDate as unknown as Date,
+                        'birthday'
+                      )}
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -249,7 +255,11 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
                     {item.jobTitle && (
                       <p className={classes.position}>{item.jobTitle}</p>
                     )}
-                    <p className={classes.specialInfo}>{item.anniversary}</p>
+                    <p className={classes.specialInfo}>
+                      <p className={classes.specialInfo}>
+                        {formatDate(item.bordTime as unknown as Date, '')}
+                      </p>
+                    </p>
                   </li>
                 ))}
               </ul>

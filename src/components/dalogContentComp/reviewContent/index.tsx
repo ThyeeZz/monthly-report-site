@@ -19,7 +19,7 @@ const ReviewCotent: React.FC<PropType> = ({ src, month }) => {
     closeDialog();
   };
   return (
-    <div>
+    <div style={{ padding: '24px' }}>
       <img src={src} alt={`${month}月报`} style={{ marginBottom: '24px' }} />
       <br />
       <Button variant="contained" onClick={handleDownload}>

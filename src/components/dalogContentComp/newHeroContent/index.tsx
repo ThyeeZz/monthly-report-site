@@ -1,9 +1,10 @@
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import CreateIcon from '@mui/icons-material/Create';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import { TEmployee } from '../../../types';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
 
 const useStyles = makeStyles(() => ({
   dialogContent: {
@@ -38,7 +39,7 @@ const DialogComponent: React.FC<any> = ({
           heroName: '',
           officePost: '',
           jobTitle: '',
-          bordTime: '',
+          bordTime: new Date(),
         }
   );
 
@@ -60,13 +61,23 @@ const DialogComponent: React.FC<any> = ({
       [key]: value,
     }));
   };
+  const handleUpdateSpacileInfo = (
+    value: string | null | undefined,
+    key: string
+  ) => {
+    setCurrentEmployee(v => ({
+      ...v,
+      [key]: value,
+    }));
+  };
+
   const handleConfirm = () => {
     if (
       Object.entries(currentEmployee).some(
         i => i[0] !== 'jobTitle' && i[1].toString().trim() === ''
       )
     ) {
-      alert('please fill in current information');
+      alert('Please complete information');
       return;
     }
     const { closeDialog } = root;
@@ -117,13 +128,23 @@ const DialogComponent: React.FC<any> = ({
           value={currentEmployee.jobTitle}
           onChange={e => handleInputInfo(e, 'jobTitle')}
         />
-        <TextField
+        {/* <TextField
           label="Bord Date"
           fullWidth={true}
           value={currentEmployee.birthDate}
           onChange={e => handleInputInfo(e, 'bordTime')}
-        />
-
+        /> */}
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Bord Time"
+            value={currentEmployee.bordTime}
+            onChange={newValue => {
+              handleUpdateSpacileInfo(newValue, 'bordTime');
+            }}
+            renderInput={params => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        <br />
         <Button
           variant="contained"
           onClick={handleConfirm}

@@ -1,6 +1,4 @@
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import CreateIcon from '@mui/icons-material/Create';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import { TEmployee } from '../../../types';
@@ -45,6 +43,10 @@ const DialogComponent: React.FC<any> = ({
           anniversary: '',
         }
   );
+  const [errorPrompt, setErrorPrompt] = useState({
+    showError: false,
+    errorMsg: '',
+  });
 
   const handleUploadAva = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
@@ -70,7 +72,15 @@ const DialogComponent: React.FC<any> = ({
         i => i[0] !== 'jobTitle' && i[1].toString().trim() === ''
       )
     ) {
-      alert('please fill in current information');
+      alert('Please complete the information');
+      return;
+    }
+
+    if (Number(currentEmployee.anniversary)) {
+      setErrorPrompt({
+        showError: true,
+        errorMsg: 'Please enter the Chinese anniversary number!',
+      });
       return;
     }
     const { closeDialog } = root;
@@ -126,6 +136,8 @@ const DialogComponent: React.FC<any> = ({
           fullWidth={true}
           value={currentEmployee.birthDate}
           onChange={e => handleInputInfo(e, 'anniversary')}
+          error={errorPrompt.showError}
+          helperText={errorPrompt.errorMsg}
         />
 
         <Button

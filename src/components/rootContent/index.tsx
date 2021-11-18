@@ -1,6 +1,9 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import { TRootContext, TEmployee, TEvent, TDialogConfig } from '../../types';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const currentMonth = new Date().getMonth();
 export const rootContext = createContext<TRootContext>({
@@ -31,6 +34,29 @@ const RootProvider = (props: any) => {
     title: '',
     open: false,
     component: <></>,
+  });
+
+  const theme = createTheme({
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          contained: {
+            background: '#008CFF',
+            boxShadow: 'none',
+            color: '#fff',
+            textTransform: 'capitalize',
+          },
+          outlined: {
+            color: '#008CFF',
+            borderWidth: '2px',
+
+            '&:hover': {
+              borderWidth: '2px',
+            },
+          },
+        },
+      },
+    },
   });
 
   const handleOpenDialog = (config: {
@@ -72,11 +98,31 @@ const RootProvider = (props: any) => {
         setPreviewEle,
       }}
     >
-      {props.children}
-      <Dialog open={dialogConfig.open} onClose={handleCloseDialog}>
-        {dialogConfig.title && <DialogTitle>{dialogConfig.title}</DialogTitle>}
-        <DialogContent>{DialogComponent}</DialogContent>
-      </Dialog>
+      <ThemeProvider theme={theme}>
+        {props.children}
+        <Dialog open={dialogConfig.open} onClose={handleCloseDialog}>
+          {dialogConfig.title && (
+            <DialogTitle>
+              {dialogConfig.title}
+              {handleCloseDialog ? (
+                <IconButton
+                  aria-label="close"
+                  onClick={handleCloseDialog}
+                  sx={{
+                    position: 'absolute',
+                    right: 8,
+                    top: 8,
+                    color: '#008CFF',
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
+              ) : null}
+            </DialogTitle>
+          )}
+          <DialogContent>{DialogComponent}</DialogContent>
+        </Dialog>
+      </ThemeProvider>
     </Provider>
   );
 };

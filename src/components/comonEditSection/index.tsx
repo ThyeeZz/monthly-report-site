@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@mui/styles';
 import { Button, Avatar } from '@mui/material';
 import React, { useState, useContext } from 'react';
 import { rootContext } from '../rootContent';
@@ -12,12 +12,11 @@ import NewHeroComponent from '../dalogContentComp/newHeroContent';
 
 const useStyles = makeStyles(() => ({
   birthdaySection: {},
-  btnGroup: {
+  titleBar: {
     marginBottom: '40px',
-    '&>button:first-child': {
-      marginRight: '16px',
-      boxShadow: 'none !iportant',
-    },
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
   },
   InfoList: {
     display: 'flex',
@@ -57,8 +56,9 @@ const componentMap = {
 
 type TKey = 'birthday' | 'anniversary' | 'newHero';
 
-const EditSection: React.FC<{ keyWord: TKey }> = ({
+const EditSection: React.FC<{ keyWord: TKey; title: string }> = ({
   keyWord = 'birdthday',
+  title,
 }) => {
   const classes = useStyles();
   const root = useContext(rootContext);
@@ -125,9 +125,10 @@ const EditSection: React.FC<{ keyWord: TKey }> = ({
 
   return (
     <div className={classes.birthdaySection}>
-      <div className={classes.btnGroup}>
+      <div className={classes.titleBar}>
+        <h3 className="title">{title}</h3>
         <Button
-          variant="contained"
+          variant="outlined"
           onClick={handleAddEmployee}
           endIcon={<AddCircleOutlineIcon />}
         >
