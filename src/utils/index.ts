@@ -4,6 +4,7 @@ export const screenShoot = async (element: HTMLElement) => {
   const canvas: HTMLCanvasElement = await html2canvas(element, {
     useCORS: true,
     backgroundColor: '#fff',
+    scale: 2,
   });
   const src: string = canvas.toDataURL('image/png');
   return src;

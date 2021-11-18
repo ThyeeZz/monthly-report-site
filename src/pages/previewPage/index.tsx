@@ -27,21 +27,25 @@ const useStyles = makeStyles(() => ({
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    padding: '67px 30px',
+    padding: '67px 30px 30px',
     color: '#fff',
 
     '& h1': {
-      fontFamily: 'Poppins',
+      fontFamily: 'Poppins ExtraBold',
       fontWeight: 800,
       fontSize: '80px',
       lineHeight: '80px',
     },
 
     '& h2': {
-      fontFamily: 'Poppins',
-      fontWeight: 600,
+      fontFamily: 'Poppins Bold',
       fontSize: '20px',
       lineHeight: '50px',
+    },
+
+    '& .year': {
+      fontFamily: 'Poppins Bold',
+      fontSize: '40px',
     },
   },
   contentWrapper: {
@@ -49,7 +53,7 @@ const useStyles = makeStyles(() => ({
     background: '#fff',
   },
   sectionContainer: {
-    marginBottom: '50px',
+    marginBottom: '30px',
     fontSize: '14px',
     lineHeight: '30px',
 
@@ -58,6 +62,11 @@ const useStyles = makeStyles(() => ({
       fontSize: '32px',
       lineHeight: '42px',
       marginBottom: '30px',
+    },
+  },
+  eventSection: {
+    '& h3': {
+      marginBottom: '20px',
     },
   },
   footerSection: {
@@ -97,7 +106,7 @@ const useStyles = makeStyles(() => ({
   staffList: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
 
     '& li': {
       flex: '0 0 50%',
@@ -105,6 +114,7 @@ const useStyles = makeStyles(() => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      marginBottom: '20px',
     },
   },
   avatar: {
@@ -161,13 +171,18 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
     <section className={`${classes.previewPageConatiner} ${className}`}>
       <div className={classes.container} ref={previewEle}>
         <div className={classes.headerSection}>
-          <h1>{MonthsEn[getMonthNumber(month - 1)]}2021</h1>
+          <h1>
+            <span>{MonthsEn[getMonthNumber(month - 1)]}</span>
+            <span className="year">{new Date().getFullYear()}</span>
+          </h1>
           <h2>{getMonthNumber(month)}月回顾</h2>
         </div>
 
         <div className={classes.contentWrapper}>
           {!!events.length ? (
-            <div className={classes.sectionContainer}>
+            <div
+              className={`${classes.sectionContainer} ${classes.eventSection}`}
+            >
               <h3>
                 &#x1F525; <span>{Months[month]}大事记</span>{' '}
               </h3>
