@@ -14,10 +14,9 @@ type PropsType = {
 const useStyles = makeStyles(() => ({
   previewPageConatiner: {
     flex: '0 0 425px',
-    fontFamily: 'PingFang',
     fontWeight: 600,
     padding: '64px',
-    background: '#fafafa',
+    background: '#324367',
   },
   container: {
     height: 'auto',
@@ -27,20 +26,23 @@ const useStyles = makeStyles(() => ({
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    padding: '67px 30px 30px',
+    padding: '67px 30px 48px',
     color: '#fff',
 
     '& h1': {
       fontFamily: 'Poppins ExtraBold',
       fontWeight: 800,
-      fontSize: '80px',
-      lineHeight: '80px',
     },
 
     '& h2': {
       fontFamily: 'Poppins Bold',
       fontSize: '20px',
-      lineHeight: '50px',
+      lineHeight: '28px',
+    },
+
+    '& .month': {
+      fontSize: '80px',
+      lineHeight: '80px',
     },
 
     '& .year': {
@@ -71,7 +73,7 @@ const useStyles = makeStyles(() => ({
   },
   footerSection: {
     background: '#000',
-    padding: '30px 0',
+    padding: '40px 0',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -92,6 +94,7 @@ const useStyles = makeStyles(() => ({
       lineHeight: '42px',
       color: '#fff',
       textAlign: 'center',
+      letterSpacing: '10px',
     },
   },
   eventsList: {
@@ -165,14 +168,14 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
 
   useEffect(() => {
     setPreviewEle(previewEle.current);
-  }, []);
+  }, [setPreviewEle]);
 
   return (
     <section className={`${classes.previewPageConatiner} ${className}`}>
       <div className={classes.container} ref={previewEle}>
         <div className={classes.headerSection}>
           <h1>
-            <span>{MonthsEn[getMonthNumber(month - 1)]}</span>
+            <span className="month">{MonthsEn[getMonthNumber(month - 1)]}</span>
             <span className="year">{new Date().getFullYear()}</span>
           </h1>
           <h2>{getMonthNumber(month)}月回顾</h2>

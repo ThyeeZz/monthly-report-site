@@ -111,6 +111,9 @@ const EventsSection: React.FC<PropType> = ({ className = '', title }) => {
           <li
             style={{
               textAlign: 'center',
+              color: '#9a9a9a',
+              fontSize: '14px',
+              lineHeight: '22px',
             }}
           >
             No Data

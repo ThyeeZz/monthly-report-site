@@ -37,6 +37,11 @@ const RootProvider = (props: any) => {
   });
 
   const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#008CFF',
+      },
+    },
     components: {
       MuiButton: {
         styleOverrides: {
@@ -45,13 +50,33 @@ const RootProvider = (props: any) => {
             boxShadow: 'none',
             color: '#fff',
             textTransform: 'capitalize',
+            borderColor: '#008cff',
+
+            '&:hover': {
+              background: '#0070CC',
+              boxShadow: 'none',
+            },
           },
           outlined: {
             color: '#008CFF',
             borderWidth: '2px',
+            borderColor: '#008cff',
 
             '&:hover': {
               borderWidth: '2px',
+              color: '#0070CC',
+              boxShadow: 'none',
+              background: 'transparent',
+            },
+          },
+        },
+      },
+
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            '&:focus': {
+              borderColor: 'red',
             },
           },
         },

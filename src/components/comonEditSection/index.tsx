@@ -102,10 +102,11 @@ const EditSection: React.FC<{ keyWord: TKey; title: string }> = ({
     return (
       <div
         style={{
-          fontSize: '24px',
-          lineHeight: '32px',
+          fontSize: '14px',
+          lineHeight: '22px',
           fontWeight: 600,
           textAlign: 'center',
+          color: '#9a9a9a',
         }}
       >
         No Data

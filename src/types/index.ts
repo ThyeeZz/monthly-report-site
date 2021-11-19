@@ -1,5 +1,3 @@
-import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
-
 export type TRootContext = {
   month: number;
   setMonth: React.Dispatch<React.SetStateAction<number>>;
