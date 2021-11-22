@@ -76,7 +76,7 @@ const DialogComponent: React.FC<any> = ({
         i => i[0] !== 'jobTitle' && i[1].toString().trim() === ''
       )
     ) {
-      alert('please fill in current information');
+      alert('please complete information!');
       return;
     }
     const { closeDialog } = root;

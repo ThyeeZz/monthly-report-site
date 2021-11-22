@@ -16,9 +16,9 @@ export const formatDate = (date: Date, format: string = 'birthday') => {
   const day = date.getDate();
 
   if (format === 'birthday') {
-    return `${month}月${day}日`;
+    return `${month + 1}月${day}日`;
   }
-  return `${year}年${month}月${day}日`;
+  return `${year}年${month + 1}月${day}日`;
 };
 
 export const getMonthNumber = (number: number) => {

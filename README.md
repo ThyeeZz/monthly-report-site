@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# How to use Monthly Report Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Step One: Select Month
 
-## Available Scripts
+Select the month in the pull-down menu. If no specific month is selected, the system automatically selects the current month for the report and the month before for the Big Event section.
 
-In the project directory, you can run:
+## Step Two: Add Big Event
 
-### `yarn start`
+- Click the `Add` button on the right side of the title, fill in the event content in the pop-up box, click the `confirm` button to add the content, and the preview the added content on the right synchronously;
+- Buttons of `Delete` and `Modify` appear when the pointer hovers over the added content - click `Delete` to delete the corresponding event, click `Modify` to modify the event in the pop-up box, and then click the `confirm` button to re-submit the modified content, and preview the modified content on the right side synchronously;
+- Note that blank content cannot be submitted.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Step Three: Add Birthday
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Click the `Add` button on the right side of the title, upload the profile picture, fill in the name, hero name, position, title (optional), select the date of birth, click the `Confirm` button to submit the content, preview the hero avatar in the edit column on the left and all other information on the right;
+- Buttons of `Delete` and `Modify` appear when the pointer hovers over the avatar - click `Delete` to delete the corresponding hero information, click `Modify` to modify the information in the pop-up box, and then click the `confirm` button to re-submit the modified information, and preview the modified content synchronously;
+- Note that blank content other than Job Title cannot be submitted.
 
-### `yarn test`
+## Step Four: Add Anniversary Hero
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- See Step Three；
+- Note that the Aniversary Number must be Chinese characters.
 
-### `yarn build`
+## Step Five: Add New Hero
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- See Step Three.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Step Six: Preview and Save the Picture
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Any block(s), if left blank, will not be displayed in the finished picture.
+- Click the `Preview` button to preview the picture style, and click the `Save` button to save the picture if the content is correct.

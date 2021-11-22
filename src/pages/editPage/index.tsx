@@ -11,7 +11,6 @@ import { screenShoot } from '../../utils';
 import ReviewCotent from '../../components/dalogContentComp/reviewContent';
 import previewIcon from '../../assets/images/preview.svg';
 import { getMonthNumber } from '../../utils';
-import { display } from '@mui/system';
 
 type PropsType = {
   className?: string;
