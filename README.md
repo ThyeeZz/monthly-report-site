@@ -1,5 +1,7 @@
 # How to use Monthly Report Site
 
+Connect to corporate intranet with [OpenVPN](https://zilliz.atlassian.net/wiki/spaces/INFRA/pages/203325541/VPN) at [Monthly Report Generation Site](https://monthly-report.zilliz.cc/)
+
 ## Step One: Select Month
 
 Select the month in the pull-down menu. If no specific month is selected, the system automatically selects the current month for the report and the month before for the Big Event section.
