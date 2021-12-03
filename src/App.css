@@ -2,8 +2,22 @@
 @import './assets/css/font.css';
 
 .App {
-  display: flex;
   font-family: 'Poppins', sans-serif;
-  max-width: 1440px;
-  margin: 0 auto;
+}
+
+.link-item {
+  border: 1px solid #008cff;
+  color: #008cff;
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 24px;
+  margin-right: 24px;
+  text-align: center;
+  line-height: 24px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+.active {
+  background-color: #008cff;
+  color: #fff;
 }
