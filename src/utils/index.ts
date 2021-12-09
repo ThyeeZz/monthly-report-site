@@ -1,4 +1,5 @@
 import html2canvas from 'html2canvas';
+import { TAreaData } from '../types';
 
 export const screenShoot = async (element: HTMLElement) => {
   const canvas: HTMLCanvasElement = await html2canvas(element, {
@@ -24,4 +25,14 @@ export const formatDate = (date: Date, format: string = 'birthday') => {
 export const getMonthNumber = (number: number) => {
   if (number >= 0) return number;
   return number + 12;
+};
+
+export const formatAreaData = (
+  areaData: TAreaData,
+  key: string
+): { key: string; value: string }[] => {
+  return Object.entries(areaData[key]).map(item => ({
+    key: item[0],
+    value: item[1],
+  }));
 };

@@ -4,6 +4,15 @@ import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles(() => ({
+  dialog: {
+    '& .MuiDialog-paper': {
+      maxWidth: '80%',
+    },
+  },
+}));
 
 const currentMonth = new Date().getMonth();
 export const rootContext = createContext<TRootContext>({
@@ -35,6 +44,8 @@ const RootProvider = (props: any) => {
     open: false,
     component: <></>,
   });
+
+  const classes = useStyles();
 
   const theme = createTheme({
     palette: {
@@ -125,7 +136,11 @@ const RootProvider = (props: any) => {
     >
       <ThemeProvider theme={theme}>
         {props.children}
-        <Dialog open={dialogConfig.open} onClose={handleCloseDialog}>
+        <Dialog
+          open={dialogConfig.open}
+          classes={{ root: classes.dialog }}
+          onClose={handleCloseDialog}
+        >
           {dialogConfig.title && (
             <DialogTitle>
               {dialogConfig.title}

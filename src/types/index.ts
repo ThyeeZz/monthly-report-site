@@ -9,7 +9,7 @@ export type TRootContext = {
   setBirthdayPerson: React.Dispatch<React.SetStateAction<TEmployee[]>>;
   setAnniversaryPerson: React.Dispatch<React.SetStateAction<TEmployee[]>>;
   setNewHeros: React.Dispatch<React.SetStateAction<TEmployee[]>>;
-  openDialog: (params: any) => void;
+  openDialog: (params: { title?: string; component: JSX.Element }) => void;
   closeDialog: () => void;
   previewEle: HTMLElement;
   setPreviewEle: React.Dispatch<HTMLElement>;
@@ -65,4 +65,10 @@ export type TDialogConfig = {
   title?: string;
   open: boolean;
   component: JSX.Element;
+};
+
+export type TAreaData = {
+  [key: string]: {
+    [key: string]: string;
+  };
 };

@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useContext } from 'react';
-import { rootContext } from '../../rootContent';
+import { rootContext } from '../../rootContext';
 
 type PropType = {
   src: string;

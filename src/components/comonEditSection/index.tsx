@@ -1,7 +1,7 @@
 import { makeStyles } from '@mui/styles';
 import { Button, Avatar } from '@mui/material';
 import React, { useState, useContext } from 'react';
-import { rootContext } from '../rootContent';
+import { rootContext } from '../rootContext';
 import { TEmployee } from '../../types';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';

@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import { rootContext } from '../../components/rootContent';
+import { rootContext } from '../rootContext';
 import { useContext, useEffect, useRef } from 'react';
 import Avatar from '@mui/material/Avatar';
 import bg from '../../assets/images/background.png';
