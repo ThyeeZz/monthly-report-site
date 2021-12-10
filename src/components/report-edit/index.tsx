@@ -1,14 +1,14 @@
 import { makeStyles } from '@mui/styles';
 import { useState, useContext } from 'react';
-import { rootContext } from '../../components/rootContent';
+import { rootContext } from '../rootContext';
 import { Months } from '../../types';
-import CommonEditSection from '../../components/comonEditSection';
+import CommonEditSection from '../comonEditSection';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import { MenuItem, Button, FormControl } from '@mui/material';
-import EventsEditSection from '../../components/eventsEditSection';
+import EventsEditSection from '../eventsEditSection';
 import { screenShoot } from '../../utils';
-import ReviewCotent from '../../components/dalogContentComp/reviewContent';
+import ReviewCotent from '../dalogContentComp/reviewContent';
 import previewIcon from '../../assets/images/preview.svg';
 import { getMonthNumber } from '../../utils';
 

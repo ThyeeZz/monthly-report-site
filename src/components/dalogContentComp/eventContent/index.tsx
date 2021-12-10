@@ -1,7 +1,7 @@
 import { makeStyles } from '@mui/styles';
 import { Button, TextField } from '@mui/material';
 import React, { useState, useContext, SetStateAction } from 'react';
-import { rootContext } from '../../rootContent';
+import { rootContext } from '../../rootContext';
 import { TEvent } from '../../../types';
 
 const useStyles = makeStyles(() => ({

@@ -1,6 +1,6 @@
 import './App.css';
 import RouterProvider from './router';
-import RootProvider from './components/rootContent';
+import RootProvider from './components/rootContext';
 import { useLocation, NavLink } from 'react-router-dom';
 
 function App() {
