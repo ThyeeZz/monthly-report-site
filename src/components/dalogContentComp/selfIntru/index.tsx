@@ -106,7 +106,6 @@ const IntruductionComponent = (props: PropsType) => {
   const classes = useStyles();
   const { setData, data } = props;
   const [date, setDate] = useState<Date | null>(data.date || null);
-  console.log(data.photo);
   const [provinceKey, setProvinceKey] = useState(
     data.provinceKey || provinces[0].key
   );
@@ -161,7 +160,6 @@ const IntruductionComponent = (props: PropsType) => {
     const { value } = e.target;
     let newState = state;
     newState.splice(index, 1, value);
-    console.log(newState);
 
     setState(<T extends Object>(v: T) => ({
       ...v,

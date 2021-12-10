@@ -1,43 +1,40 @@
 import { makeStyles } from '@mui/styles';
-import { Button, Typography, Avatar } from '@mui/material';
-import { useState, useContext } from 'react';
+import { Button } from '@mui/material';
+import { useState, useContext, useRef } from 'react';
 import { rootContext } from '../rootContext';
 import IntruductionComponent from '../dalogContentComp/selfIntru';
-import { MonthsEn } from '../../types';
-import { formatAreaData } from '../../utils';
-import areaData from '../../utils/areaData.json';
-
-const provinces = formatAreaData(areaData, '86');
+import { handleReadInfoFile } from '../../utils';
+import { IInfoType, IInfoFromFeishu } from '../../types';
 
 const useStyles = makeStyles(() => ({
   boradPageEditor: {
     flex: 1,
-    padding: '60px',
-  },
-  lineItem: {
-    marginBottom: '24px',
+    padding: '60px 0',
     display: 'flex',
   },
-
-  topSection: {
-    marginBottom: '16px',
-    borderBottom: '1px solid blue',
+  btn: {
+    marginRight: '24px',
   },
-  line: {
-    display: 'flex',
-    marginBottom: '24px',
-    alignItems: 'center',
-  },
-  label: {
-    paddingRight: '16px',
+  hidden: {
+    visibility: 'hidden',
+    opacity: 0,
+    position: 'absolute',
+    zIndex: -1,
   },
 }));
 
-const BoradEditor = () => {
+interface PropsType {
+  sendData: React.Dispatch<React.SetStateAction<IInfoType[]>>;
+  handleSave: () => void;
+}
+const BoradEditor = (props: PropsType) => {
   const classes = useStyles();
   const root = useContext(rootContext);
+  const { sendData, handleSave } = props;
+  const uploader = useRef<HTMLInputElement>(null!);
 
-  const [data, setData] = useState<any>({
+  const [disabled, setDisabled] = useState(false);
+  const [data, setData] = useState<IInfoType>({
     photo: '',
     name: '',
     heroPhoto: '',
@@ -48,38 +45,16 @@ const BoradEditor = () => {
     location: '',
     department: '',
     mentor: '',
-    provinceKey: '',
-    date: '',
+    province: '',
+    date: null,
     hobbies: [''],
     education: [''],
     exprience: [''],
   });
 
-  const getProvinceVal = (provinceKey: string) => {
-    if (!provinceKey) {
-      return '';
-    }
-    return provinces.filter(({ key }) => key === provinceKey)[0].value;
-  };
-
-  const getBirthday = (date: Date | null) => {
-    if (!date) {
-      return '';
-    }
-    const month = MonthsEn[new Date(date).getMonth()];
-    const day = new Date(date).getDate();
-    return `, ${month}${day}th`;
-  };
-
-  const formatHobbitItem = (hobbit: string) => {
-    if (!hobbit) {
-      return '';
-    }
-    return `#${hobbit}`;
-  };
-
   const handleConfirmData = (data: any) => {
     setData(data);
+    sendData(data);
     root.closeDialog();
   };
 
@@ -92,126 +67,85 @@ const BoradEditor = () => {
     });
   };
 
+  const handleBatchImport = () => {
+    uploader.current.click();
+  };
+
+  const dataConvert = (fromList: IInfoFromFeishu[]): void => {
+    const infoList = fromList.map((from: IInfoFromFeishu) => {
+      const hobbies: string[] = [];
+      const education: string[] = [];
+      const exprience: string[] = [];
+      setDisabled(true);
+
+      Object.keys(from).forEach(key => {
+        if (key.includes('Hobbies')) {
+          hobbies.push(from[key as keyof IInfoFromFeishu]);
+        }
+        if (key.includes('Past Experience')) {
+          exprience.push(from[key as keyof IInfoFromFeishu]);
+        }
+        if (key.includes('Education Background')) {
+          education.push(from[key as keyof IInfoFromFeishu]);
+        }
+      });
+
+      return {
+        photo: from['Photo'],
+        name: from['Name'],
+        heroPhoto: from['Hero Avatar'],
+        selfIntru: from['Brief Self-introduction'],
+        heroName: from['Hero Name'],
+        reason: from['Reason'],
+        title: from['Title'],
+        location: from['Working Location'],
+        department: from['Department'],
+        mentor: from['Line Manager'],
+        province: from['Place Of Birth'],
+        date: new Date(from['Birthday']),
+        hobbies,
+        education,
+        exprience,
+      };
+    });
+
+    sendData(infoList);
+  };
+
   return (
     <div className={classes.boradPageEditor}>
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Phote:{' '}
-        </Typography>
-        <Avatar alt={data.name} src={data.photo}></Avatar>
-      </div>
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Name:{' '}
-        </Typography>
-        <Typography variant="body1">{data.name}</Typography>
+      <input
+        type="file"
+        accept=".xlsx, .xls"
+        onChange={e => {
+          handleReadInfoFile(e, dataConvert);
+        }}
+        className={classes.hidden}
+        ref={uploader}
+      />
+
+      <div className={classes.btn}>
+        <Button variant="contained" onClick={handleBatchImport}>
+          Batch Import
+        </Button>
       </div>
 
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Brief Self-introduction:{' '}
-        </Typography>
-        <Typography variant="body1">{data.selfIntru}</Typography>
+      <div className={classes.btn}>
+        <Button
+          variant="contained"
+          onClick={handleClick}
+          className={classes.btn}
+          disabled={disabled}
+        >
+          Edit Your Profile
+        </Button>
       </div>
 
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Hero Avatar:{' '}
-        </Typography>
-        <Avatar alt={data.heroName} src={data.heroPhoto}></Avatar>
+      <div>
+        <Button variant="outlined" onClick={handleSave}>
+          Save
+        </Button>
       </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Your Hero:{' '}
-        </Typography>
-        <Typography variant="body1">{data.heroName}</Typography>
-      </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Reason:{' '}
-        </Typography>
-        <Typography variant="body1">{data.reason}</Typography>
-      </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Title:{' '}
-        </Typography>
-        <Typography variant="body1">{data.title}</Typography>
-      </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Working Location:{' '}
-        </Typography>
-        <Typography variant="body1">{data.location}</Typography>
-      </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Department:{' '}
-        </Typography>
-        <Typography variant="body1">{data.department}</Typography>
-      </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Line Manager:{' '}
-        </Typography>
-        <Typography variant="body1">{data.mentor}</Typography>
-      </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Place Of Birth:{' '}
-        </Typography>
-        <Typography variant="body1">
-          {getProvinceVal(data.provinceKey)} {getBirthday(data.date)}
-        </Typography>
-      </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Hobbies:{' '}
-        </Typography>
-        {
-          <div>
-            {data.hobbies.map((item: string) => (
-              <Typography variant="body1" key={item}>
-                {formatHobbitItem(item)}
-              </Typography>
-            ))}
-          </div>
-        }
-      </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Education Background:{' '}
-        </Typography>
-        {data.education.map((item: string) => (
-          <Typography variant="body1" key={item}>
-            {item}
-          </Typography>
-        ))}
-      </div>
-
-      <div className={classes.line}>
-        <Typography variant="body1" className={classes.label}>
-          Past Experience:{' '}
-        </Typography>
-        {data.exprience.map((item: string) => (
-          <Typography variant="body1" key={item}>
-            {item}
-          </Typography>
-        ))}
-      </div>
-
-      <Button variant="contained" onClick={handleClick}>
-        Edit Your Profile
-      </Button>
     </div>
   );
 };

@@ -72,3 +72,44 @@ export type TAreaData = {
     [key: string]: string;
   };
 };
+
+export interface IInfoType {
+  photo: string;
+  name: string;
+  heroPhoto: string;
+  selfIntru: string;
+  heroName: string;
+  reason: string;
+  title: string;
+  location: string;
+  department: string;
+  mentor: string;
+  province: string;
+  date: Date | null;
+  hobbies: string[];
+  education: string[];
+  exprience: string[];
+}
+
+export interface IInfoFromFeishu {
+  Birthday: string;
+  'Brief Self-introduction': string;
+  Department: string;
+  'Education Background': string;
+  'Education Background_1': string;
+  'Hero Avatar': string;
+  'Hero Name': string;
+  Hobbies: string;
+  Hobbies_1: string;
+  Hobbies_2: string;
+  Hobbies_3: string;
+  'Line Manager': string;
+  Name: string;
+  'Past Experience': string;
+  'Past Experience_1': string;
+  Photo: string;
+  'Place Of Birth': string;
+  Reason: string;
+  Title: string;
+  'Working Location': string;
+}
