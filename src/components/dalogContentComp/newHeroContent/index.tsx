@@ -39,7 +39,7 @@ const DialogComponent: React.FC<any> = ({
           heroName: '',
           officePost: '',
           jobTitle: '',
-          bordTime: new Date(),
+          bordTime: '',
         }
   );
 
@@ -72,14 +72,14 @@ const DialogComponent: React.FC<any> = ({
   };
 
   const handleConfirm = () => {
-    if (
-      Object.entries(currentEmployee).some(
-        i => i[0] !== 'jobTitle' && i[1].toString().trim() === ''
-      )
-    ) {
-      alert('Please complete information');
-      return;
-    }
+    // if (
+    //   Object.entries(currentEmployee).some(
+    //     i => i[0] !== 'jobTitle' && i[1].toString().trim() === ''
+    //   )
+    // ) {
+    //   alert('Please complete information');
+    //   return;
+    // }
     const { closeDialog } = root;
     let templist = staff;
 
@@ -89,7 +89,10 @@ const DialogComponent: React.FC<any> = ({
       templist = templist.concat(currentEmployee);
     }
     setStaff(templist);
-    root.setNewHeros(templist);
+    root.setReportData((v: any) => ({
+      ...v,
+      newHeros: templist,
+    }));
     closeDialog();
   };
   // console.log('currentEmployee---', currentEmployee);
@@ -128,22 +131,13 @@ const DialogComponent: React.FC<any> = ({
           value={currentEmployee.jobTitle}
           onChange={e => handleInputInfo(e, 'jobTitle')}
         />
-        {/* <TextField
+        <TextField
           label="Bord Date"
           fullWidth={true}
           value={currentEmployee.birthDate}
           onChange={e => handleInputInfo(e, 'bordTime')}
-        /> */}
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label="Bord Time"
-            value={currentEmployee.bordTime}
-            onChange={newValue => {
-              handleUpdateSpacileInfo(newValue, 'bordTime');
-            }}
-            renderInput={params => <TextField {...params} />}
-          />
-        </LocalizationProvider>
+        />
+
         <br />
         <Button
           variant="contained"

@@ -12,6 +12,7 @@ const useStyles = makeStyles(() => ({
 
 const Report = () => {
   const classes = useStyles();
+
   return (
     <div className={classes.reportPageContainer}>
       <EditPage />

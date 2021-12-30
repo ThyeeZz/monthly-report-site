@@ -6,7 +6,7 @@ import {
   InputLabel,
   FormControl,
 } from '@mui/material';
-import FileUpload from '../../fileUpload';
+import AvatarUpload from '../../fileUpload/avatarUploader';
 import React, { useState, useRef, useEffect, ReactElement } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import areaData from '../../../utils/areaData.json';
@@ -220,7 +220,7 @@ const IntruductionComponent = (props: PropsType) => {
       <div className={classes.twoPiecesRow}>
         <div>
           <div className={classes.lineItem}>
-            <FileUpload
+            <AvatarUpload
               name="photo"
               value={photo}
               onChange={val => setPhoto(val)}
@@ -257,7 +257,7 @@ const IntruductionComponent = (props: PropsType) => {
 
         <div>
           <div className={classes.lineItem}>
-            <FileUpload
+            <AvatarUpload
               name="heroPhoto"
               value={heroPhoto}
               onChange={val => setHeroPhoto(val)}

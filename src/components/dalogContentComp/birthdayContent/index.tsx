@@ -39,7 +39,7 @@ const DialogComponent: React.FC<any> = ({
           heroName: '',
           officePost: '',
           jobTitle: '',
-          birthDate: new Date(),
+          birthDate: '',
         }
   );
 
@@ -71,14 +71,15 @@ const DialogComponent: React.FC<any> = ({
     }));
   };
   const handleConfirm = () => {
-    if (
-      Object.entries(currentEmployee).some(
-        i => i[0] !== 'jobTitle' && i[1].toString().trim() === ''
-      )
-    ) {
-      alert('please complete information!');
-      return;
-    }
+    console.log(currentEmployee);
+    // if (
+    //   Object.entries(currentEmployee).some(
+    //     i => i[0] !== 'jobTitle' && i[1].toString().trim() === ''
+    //   )
+    // ) {
+    //   alert('please complete information!');
+    //   return;
+    // }
     const { closeDialog } = root;
     let templist = staff;
 
@@ -88,7 +89,10 @@ const DialogComponent: React.FC<any> = ({
       templist = templist.concat(currentEmployee);
     }
     setStaff(templist);
-    root.setBirthdayPerson(templist);
+    root.setReportData((v: any) => ({
+      ...v,
+      birthdayPerson: templist,
+    }));
     closeDialog();
   };
   return (
@@ -127,17 +131,12 @@ const DialogComponent: React.FC<any> = ({
           onChange={e => handleInputInfo(e, 'jobTitle')}
         />
 
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label="Birth Date"
-            views={['month', 'day']}
-            value={currentEmployee.birthDate}
-            onChange={newValue => {
-              handleUpdateSpacileInfo(newValue, 'birthDate');
-            }}
-            renderInput={params => <TextField {...params} />}
-          />
-        </LocalizationProvider>
+        <TextField
+          label="Birth Date"
+          fullWidth={true}
+          value={currentEmployee.birthDate}
+          onChange={e => handleInputInfo(e, 'birthDate')}
+        />
         <br />
 
         <Button

@@ -11,6 +11,8 @@ import DialogComponent from '../dalogContentComp/eventContent';
 type PropType = {
   className?: string;
   title: string;
+  data: { value: string; showError: boolean }[];
+  setData: any;
 };
 
 const useStyles = makeStyles(theme => ({
@@ -58,11 +60,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const EventsSection: React.FC<PropType> = ({ className = '', title }) => {
+const EventsSection: React.FC<PropType> = ({
+  className = '',
+  title,
+  data: events,
+  setData: setEvents,
+}) => {
   const classes = useStyles();
   const root = useContext(rootContext);
-
-  const [events, setEvents] = useState<TEvent[]>([]);
 
   const handleDeleteThisEvent = (index: number) => {
     let tempList = [...events];

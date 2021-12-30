@@ -12,7 +12,7 @@ function App() {
         <NavLink to="/" className="link-item">
           Report
         </NavLink>
-        <NavLink to="/Borad" className="link-item">
+        <NavLink to="/Board" className="link-item">
           Borad
         </NavLink>
       </div>

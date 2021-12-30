@@ -39,7 +39,7 @@ interface Props {
   tips?: string | ReactElement;
   name?: string;
 }
-const FileUpload = ({
+const AvatarUpload = ({
   value,
   onChange,
   label,
@@ -82,4 +82,4 @@ const FileUpload = ({
   );
 };
 
-export default FileUpload;
+export default AvatarUpload;

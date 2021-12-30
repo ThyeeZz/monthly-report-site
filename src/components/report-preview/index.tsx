@@ -5,7 +5,8 @@ import Avatar from '@mui/material/Avatar';
 import bg from '../../assets/images/background.png';
 import { MonthsEn, Months } from '../../types';
 import zilliz from '../../assets/images/zilliz.png';
-import { formatDate, getMonthNumber } from '../../utils';
+import { formatDate, getMonthNumber, useSystem } from '../../utils';
+import { TEmployee, TEvent } from '../../types';
 
 type PropsType = {
   className?: string;
@@ -156,14 +157,14 @@ const useStyles = makeStyles(() => ({
 
 const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
   const previewEle = useRef<any>(null!);
+
   const {
     month,
-    events,
-    birthdayPerson,
-    anniversaryPerson,
-    newHeros,
+    reportData: { events, birthdayPerson, anniversaryPerson, newHeros },
     setPreviewEle,
   } = useContext(rootContext);
+  console.log(month);
+
   const classes = useStyles();
 
   useEffect(() => {
@@ -175,10 +176,10 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
       <div className={classes.container} ref={previewEle}>
         <div className={classes.headerSection}>
           <h1>
-            <span className="month">{MonthsEn[getMonthNumber(month - 1)]}</span>
+            <span className="month">{MonthsEn[month]}</span>
             <span className="year">{new Date().getFullYear()}</span>
           </h1>
-          <h2>{getMonthNumber(month)}月回顾</h2>
+          <h2>{month + 1}月回顾</h2>
         </div>
 
         <div className={classes.contentWrapper}>
@@ -187,10 +188,10 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
               className={`${classes.sectionContainer} ${classes.eventSection}`}
             >
               <h3>
-                &#x1F525; <span>{Months[month]}大事记</span>{' '}
+                &#x1F525; <span>{Months[getMonthNumber(month) - 1]}大事记</span>{' '}
               </h3>
               <ul className={classes.eventsList}>
-                {events.map((item, index) => (
+                {(events as TEvent[]).map((item, index) => (
                   <li key={index}>
                     <p className={classes.text}>{item.value} </p>
                   </li>
@@ -205,7 +206,7 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
                 &#x1F382; <span>{Months[month]}寿星</span>{' '}
               </h3>
               <ul className={classes.staffList}>
-                {birthdayPerson.map((item, index) => (
+                {(birthdayPerson as TEmployee[]).map((item, index) => (
                   <li key={index}>
                     <Avatar
                       alt={item.name}
@@ -219,10 +220,11 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
                       <p className={classes.position}>{item.jobTitle}</p>
                     )}
                     <p className={classes.specialInfo}>
-                      {formatDate(
+                      {/* {formatDate(
                         item.birthDate as unknown as Date,
                         'birthday'
-                      )}
+                      )} */}
+                      {item.birthDate}
                     </p>
                   </li>
                 ))}
@@ -234,7 +236,7 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
             <div className={classes.sectionContainer}>
               <h3>&#x1F389; 周年庆</h3>
               <ul className={classes.staffList}>
-                {anniversaryPerson.map((item, index) => (
+                {(anniversaryPerson as TEmployee[]).map((item, index) => (
                   <li key={index}>
                     <Avatar
                       alt={item.name}
@@ -260,7 +262,7 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
             <div className={classes.sectionContainer}>
               <h3>&#x1F44b; 新英雄</h3>
               <ul className={classes.staffList}>
-                {newHeros.map((item, index) => (
+                {(newHeros as TEmployee[]).map((item, index) => (
                   <li key={index}>
                     <Avatar
                       alt={item.name}
@@ -275,7 +277,8 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
                     )}
                     <p className={classes.specialInfo}>
                       <p className={classes.specialInfo}>
-                        {formatDate(item.bordTime as unknown as Date, '')}
+                        {/* {formatDate(item.bordTime as unknown as Date, '')} */}
+                        {item.bordTime}
                       </p>
                     </p>
                   </li>

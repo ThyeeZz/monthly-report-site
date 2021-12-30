@@ -56,13 +56,14 @@ const componentMap = {
 
 type TKey = 'birthday' | 'anniversary' | 'newHero';
 
-const EditSection: React.FC<{ keyWord: TKey; title: string }> = ({
-  keyWord = 'birdthday',
-  title,
-}) => {
+const EditSection: React.FC<{
+  keyWord: TKey;
+  title: string;
+  data: TEmployee[];
+  setData: any;
+}> = ({ keyWord = 'birdthday', title, data: staff, setData: setStaff }) => {
   const classes = useStyles();
   const root = useContext(rootContext);
-  const [staff, setStaff] = useState<TEmployee[]>([]);
 
   const DialogComponent = componentMap[keyWord as TKey];
 

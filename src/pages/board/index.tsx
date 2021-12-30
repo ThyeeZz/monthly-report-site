@@ -1,12 +1,12 @@
-import BoradEditor from '../../components/borad-edit';
-import BoradPreview from '../../components/borad-preview';
+import BoardEditor from '../../components/board-edit';
+import BoardPreview from '../../components/board-preview';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
 import { IInfoType } from '../../types';
 import { screenShoot } from '../../utils';
 
 const useStyles = makeStyles(() => ({
-  boradPageContainer: {
+  boardPageContainer: {
     maxWidth: '1440px',
     margin: '0 auto',
     alignItems: 'stretch',
@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Borad = () => {
+const Board = () => {
   const classes = useStyles();
   const [data, setData] = useState<IInfoType[]>([
     {
@@ -58,16 +58,16 @@ const Borad = () => {
   };
 
   return (
-    <div className={classes.boradPageContainer}>
-      <BoradEditor sendData={setData} handleSave={handleSave} />
+    <div className={classes.boardPageContainer}>
+      <BoardEditor sendData={setData} handleSave={handleSave} />
 
       {data.map(v => (
         <div className="preview-card" key={v.name}>
-          <BoradPreview data={v} />
+          <BoardPreview data={v} />
         </div>
       ))}
     </div>
   );
 };
 
-export default Borad;
+export default Board;
