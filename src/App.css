@@ -5,19 +5,23 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.nav {
+  padding: 24px;
+}
 .link-item {
-  border: 1px solid #008cff;
-  color: #008cff;
+  color: #000;
   text-decoration: none;
   display: inline-block;
-  padding: 8px 24px;
+  padding: 4px 0;
   margin-right: 24px;
   text-align: center;
   line-height: 24px;
   font-size: 16px;
-  border-radius: 4px;
+}
+.link-item:hover {
+  color: #008cff;
 }
 .active {
-  background-color: #008cff;
-  color: #fff;
+  color: #008cff;
+  border-bottom: 1px solid #008cff;
 }

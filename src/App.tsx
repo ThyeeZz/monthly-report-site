@@ -1,11 +1,9 @@
 import './App.css';
 import RouterProvider from './router';
 import RootProvider from './components/rootContext';
-import { useLocation, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function App() {
-  const location = useLocation();
-
   return (
     <div className="App">
       <div className="nav">
@@ -13,7 +11,7 @@ function App() {
           Report
         </NavLink>
         <NavLink to="/Board" className="link-item">
-          Borad
+          Board
         </NavLink>
       </div>
       <RootProvider>

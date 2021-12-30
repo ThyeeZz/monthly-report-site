@@ -24,7 +24,7 @@ export type TEmployee = {
   officePost: string;
   jobTitle?: string;
   birthDate?: string;
-  bordTime?: string;
+  boardTime?: string;
   anniversary?: string;
 };
 

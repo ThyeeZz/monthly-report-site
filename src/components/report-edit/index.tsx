@@ -124,8 +124,8 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
         officePost: job_title,
         jobTitle: '',
         birthDate: birthday ? formatDate(birthday as Date) : undefined,
-        bordTime: board_date ? formatDate(board_date) : undefined,
-        anniversary,
+        boardTime: board_date ? formatDate(board_date) : undefined,
+        anniversary: anniversary || '一',
       };
     });
   };
