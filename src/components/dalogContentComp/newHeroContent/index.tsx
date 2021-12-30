@@ -39,7 +39,7 @@ const DialogComponent: React.FC<any> = ({
           heroName: '',
           officePost: '',
           jobTitle: '',
-          bordTime: '',
+          boardTime: '',
         }
   );
 
@@ -132,10 +132,10 @@ const DialogComponent: React.FC<any> = ({
           onChange={e => handleInputInfo(e, 'jobTitle')}
         />
         <TextField
-          label="Bord Date"
+          label="Board Date"
           fullWidth={true}
-          value={currentEmployee.birthDate}
-          onChange={e => handleInputInfo(e, 'bordTime')}
+          value={currentEmployee.boardTime}
+          onChange={e => handleInputInfo(e, 'boardTime')}
         />
 
         <br />

@@ -130,6 +130,7 @@ const useStyles = makeStyles(() => ({
     fontSize: '18px',
     lineHeight: '24px',
     marginBottom: '4px',
+    textAlign: 'center',
   },
   heroName: {
     fontSize: '12px',
@@ -277,8 +278,8 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
                     )}
                     <p className={classes.specialInfo}>
                       <p className={classes.specialInfo}>
-                        {/* {formatDate(item.bordTime as unknown as Date, '')} */}
-                        {item.bordTime}
+                        {/* {formatDate(item.boardTime as unknown as Date, '')} */}
+                        {item.boardTime}
                       </p>
                     </p>
                   </li>

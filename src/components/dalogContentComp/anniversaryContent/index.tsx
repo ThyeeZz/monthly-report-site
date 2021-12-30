@@ -137,7 +137,7 @@ const DialogComponent: React.FC<any> = ({
         <TextField
           label="Anniversary Number"
           fullWidth={true}
-          value={currentEmployee.birthDate}
+          value={currentEmployee.anniversary}
           onChange={e => handleInputInfo(e, 'anniversary')}
           error={errorPrompt.showError}
           helperText={errorPrompt.errorMsg}
