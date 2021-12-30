@@ -67,22 +67,22 @@ const DialogComponent: React.FC<any> = ({
     }));
   };
   const handleConfirm = () => {
-    if (
-      Object.entries(currentEmployee).some(
-        i => i[0] !== 'jobTitle' && i[1].toString().trim() === ''
-      )
-    ) {
-      alert('Please complete the information');
-      return;
-    }
+    // if (
+    //   Object.entries(currentEmployee).some(
+    //     i => i[0] !== 'jobTitle' && i[1].toString().trim() === ''
+    //   )
+    // ) {
+    //   alert('Please complete the information');
+    //   return;
+    // }
 
-    if (Number(currentEmployee.anniversary)) {
-      setErrorPrompt({
-        showError: true,
-        errorMsg: 'Please enter the Chinese anniversary number!',
-      });
-      return;
-    }
+    // if (Number(currentEmployee.anniversary)) {
+    //   setErrorPrompt({
+    //     showError: true,
+    //     errorMsg: 'Please enter the Chinese anniversary number!',
+    //   });
+    //   return;
+    // }
     const { closeDialog } = root;
     let templist = staff;
 
@@ -92,7 +92,10 @@ const DialogComponent: React.FC<any> = ({
       templist = templist.concat(currentEmployee);
     }
     setStaff(templist);
-    root.setAnniversaryPerson(templist);
+    root.setReportData((v: any) => ({
+      ...v,
+      anniversaryPerson: templist,
+    }));
     closeDialog();
   };
   // console.log('currentEmployee---', currentEmployee);

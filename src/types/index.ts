@@ -13,6 +13,8 @@ export type TRootContext = {
   closeDialog: () => void;
   previewEle: HTMLElement;
   setPreviewEle: React.Dispatch<HTMLElement>;
+  reportData: any;
+  setReportData: any;
 };
 
 export type TEmployee = {
@@ -23,7 +25,7 @@ export type TEmployee = {
   jobTitle?: string;
   birthDate?: string;
   bordTime?: string;
-  anniversary?: number;
+  anniversary?: string;
 };
 
 export type TEvent = {
@@ -112,4 +114,14 @@ export interface IInfoFromFeishu {
   Reason: string;
   Title: string;
   'Working Location': string;
+}
+
+export interface StaffInfoTypeFromFile {
+  birthday: any;
+  name: string;
+  hero_name: string;
+  department: string;
+  job_title: string;
+  board_date?: string;
+  anniversary?: string;
 }

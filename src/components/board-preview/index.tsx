@@ -9,7 +9,7 @@ import { useRef } from 'react';
 const provinces = formatAreaData(areaData, '86');
 
 const useStyles = makeStyles(() => ({
-  boradPagePreview: {
+  boardPagePreview: {
     width: '100%',
     minHeight: '900px',
   },
@@ -60,7 +60,7 @@ const useStyles = makeStyles(() => ({
     padding: '0 60px',
     boxSizing: 'border-box',
     display: 'flex',
-    marginBottom: '40px',
+    paddingBottom: '40px',
   },
   imgWrapper: {
     flex: '0 0 206px',
@@ -109,7 +109,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const BoradPreview = (props: { data: any }) => {
+const BoardPreview = (props: { data: any }) => {
   const classes = useStyles();
   const { data } = props;
 
@@ -130,7 +130,7 @@ const BoradPreview = (props: { data: any }) => {
   };
 
   return (
-    <section className={classes.boradPagePreview}>
+    <section className={classes.boardPagePreview}>
       <div className={classes.header}>
         <img src={hello} alt="" />
         <div className={classes.colorfulBg}></div>
@@ -294,4 +294,4 @@ const BoradPreview = (props: { data: any }) => {
   );
 };
 
-export default BoradPreview;
+export default BoardPreview;

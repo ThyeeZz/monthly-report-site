@@ -30,6 +30,8 @@ export const rootContext = createContext<TRootContext>({
   closeDialog: () => {},
   previewEle: null!,
   setPreviewEle: () => {},
+  reportData: {},
+  setReportData: () => {},
 });
 
 const RootProvider = (props: any) => {
@@ -39,6 +41,18 @@ const RootProvider = (props: any) => {
   const [birthdayPerson, setBirthdayPerson] = useState<TEmployee[]>([]);
   const [anniversaryPerson, setAnniversaryPerson] = useState<TEmployee[]>([]);
   const [newHeros, setNewHeros] = useState<TEmployee[]>([]);
+
+  const [reportData, setReportData] = useState<{
+    events: TEvent[];
+    birthdayPerson: TEmployee[];
+    anniversaryPerson: TEmployee[];
+    newHeros: TEmployee[];
+  }>({
+    events: [],
+    birthdayPerson: [],
+    anniversaryPerson: [],
+    newHeros: [],
+  });
   const [dialogConfig, setDialogConfig] = useState<TDialogConfig>({
     title: '',
     open: false,
@@ -132,6 +146,8 @@ const RootProvider = (props: any) => {
         closeDialog: handleCloseDialog,
         previewEle,
         setPreviewEle,
+        reportData,
+        setReportData,
       }}
     >
       <ThemeProvider theme={theme}>

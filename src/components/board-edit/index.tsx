@@ -7,7 +7,7 @@ import { handleReadInfoFile } from '../../utils';
 import { IInfoType, IInfoFromFeishu } from '../../types';
 
 const useStyles = makeStyles(() => ({
-  boradPageEditor: {
+  boardPageEditor: {
     flex: 1,
     padding: '60px 0',
     display: 'flex',
@@ -27,7 +27,7 @@ interface PropsType {
   sendData: React.Dispatch<React.SetStateAction<IInfoType[]>>;
   handleSave: () => void;
 }
-const BoradEditor = (props: PropsType) => {
+const BoardEditor = (props: PropsType) => {
   const classes = useStyles();
   const root = useContext(rootContext);
   const { sendData, handleSave } = props;
@@ -113,7 +113,7 @@ const BoradEditor = (props: PropsType) => {
   };
 
   return (
-    <div className={classes.boradPageEditor}>
+    <div className={classes.boardPageEditor}>
       <input
         type="file"
         accept=".xlsx, .xls"
@@ -150,4 +150,4 @@ const BoradEditor = (props: PropsType) => {
   );
 };
 
-export default BoradEditor;
+export default BoardEditor;

@@ -5,14 +5,14 @@ import {
   NavLink,
 } from 'react-router-dom';
 import Report from '../pages/report';
-import Borad from '../pages/borad';
+import Board from '../pages/board';
 
 const RouterProvider = () => {
   return (
     <Routes>
       <Route path="/">
         <Route index element={<Report />} />
-        <Route path="borad" element={<Borad />} />
+        <Route path="borad" element={<Board />} />
         <Route
           path="*"
           element={
