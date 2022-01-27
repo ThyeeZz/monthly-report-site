@@ -12,7 +12,7 @@ const RouterProvider = () => {
     <Routes>
       <Route path="/">
         <Route index element={<Report />} />
-        <Route path="borad" element={<Board />} />
+        <Route path="board" element={<Board />} />
         <Route
           path="*"
           element={

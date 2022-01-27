@@ -10,7 +10,7 @@ function App() {
         <NavLink to="/" className="link-item">
           Report
         </NavLink>
-        <NavLink to="/Board" className="link-item">
+        <NavLink to="/board" className="link-item">
           Board
         </NavLink>
       </div>

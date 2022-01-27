@@ -13,6 +13,7 @@ type PropType = {
   title: string;
   data: { value: string; showError: boolean }[];
   setData: any;
+  isImport: boolean;
 };
 
 const useStyles = makeStyles(theme => ({
@@ -65,15 +66,22 @@ const EventsSection: React.FC<PropType> = ({
   title,
   data: events,
   setData: setEvents,
+  isImport,
 }) => {
   const classes = useStyles();
   const root = useContext(rootContext);
 
   const handleDeleteThisEvent = (index: number) => {
+    if (isImport) {
+      return;
+    }
     let tempList = [...events];
     tempList.splice(index, 1);
     setEvents(tempList);
-    root.setEvents(tempList);
+    root.setReportData((v: any) => ({
+      ...v,
+      events: tempList,
+    }));
   };
 
   const handleAddEvents = () => {

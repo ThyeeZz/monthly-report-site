@@ -61,7 +61,14 @@ const EditSection: React.FC<{
   title: string;
   data: TEmployee[];
   setData: any;
-}> = ({ keyWord = 'birdthday', title, data: staff, setData: setStaff }) => {
+  isImport: boolean;
+}> = ({
+  keyWord = 'birdthday',
+  title,
+  data: staff,
+  setData: setStaff,
+  isImport,
+}) => {
   const classes = useStyles();
   const root = useContext(rootContext);
 
@@ -119,10 +126,23 @@ const EditSection: React.FC<{
     e: React.MouseEvent<HTMLSpanElement>,
     index: number
   ) => {
+    if (isImport) {
+      return;
+    }
     let templist = [...staff];
+    const key =
+      keyWord === 'anniversary'
+        ? 'anniversaryPerson'
+        : keyWord === 'birthday'
+        ? 'birthdayPerson'
+        : keyWord === 'newHero'
+        ? 'newHeros'
+        : 'anniversaryPerson';
     templist.splice(index, 1);
-    setStaff(templist);
-    root.setBirthdayPerson(templist);
+    root.setReportData((v: any) => ({
+      ...v,
+      [key]: templist,
+    }));
   };
 
   return (

@@ -73,7 +73,10 @@ const DialogComponent: React.FC<PropType> = ({
       templist = templist.concat(currentEvent);
     }
     setEvents(templist);
-    root.setEvents(templist);
+    root.setReportData((v: any) => ({
+      ...v,
+      events: templist,
+    }));
     closeDialog();
   };
   // console.log('currentEmployee---', currentEmployee);

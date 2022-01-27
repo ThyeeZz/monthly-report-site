@@ -16,7 +16,7 @@ export const screenShoot = async (element: HTMLElement) => {
 export const formatDate = (date: Date, format: string = 'birthday') => {
   const year = date.getFullYear();
   const month = date.getMonth();
-  const day = date.getDate();
+  const day = date.getDate() + 1;
 
   if (format === 'birthday') {
     return `${month + 1}月${day}日`;

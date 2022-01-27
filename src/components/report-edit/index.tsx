@@ -81,6 +81,7 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
   const [birthdayPerson, setBirthdayPerson] = useState<TEmployee[]>([]);
   const [anniversaryPerson, setAnniversaryPerson] = useState<TEmployee[]>([]);
   const [newHeros, setNewHeros] = useState<TEmployee[]>([]);
+  const [isImport, setIsImport] = useState<boolean>(false);
 
   const handleMonthChange = (e: SelectChangeEvent<string>) => {
     const value = parseInt(e.target.value);
@@ -148,6 +149,7 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
   const dataConvert = (data: any) => {
     const { setReportData } = root;
     const { anniversary = [], birthday = [], events = [], board = [] } = data;
+    setIsImport(true);
 
     setEvents(formatEvents(events));
     setBirthdayPerson(formatStaffData(birthday));
@@ -183,6 +185,7 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
           title={`${Months[getMonthNumber(month) - 1]}大事记`}
           data={events}
           setData={setEvents}
+          isImport={isImport}
         />
       </div>
 
@@ -192,6 +195,7 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
           title={`${Months[month]}寿星`}
           data={birthdayPerson}
           setData={setBirthdayPerson}
+          isImport={isImport}
         />
       </div>
 
@@ -201,6 +205,7 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
           title="周年庆"
           data={anniversaryPerson}
           setData={setAnniversaryPerson}
+          isImport={isImport}
         />
       </div>
 
@@ -210,6 +215,7 @@ const EditPage: React.FC<PropsType> = ({ className = '' }) => {
           title="新英雄"
           data={newHeros}
           setData={setNewHeros}
+          isImport={isImport}
         />
       </div>
 

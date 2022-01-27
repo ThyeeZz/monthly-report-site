@@ -189,7 +189,7 @@ const PreviewPage: React.FC<PropsType> = ({ className = '' }) => {
               className={`${classes.sectionContainer} ${classes.eventSection}`}
             >
               <h3>
-                &#x1F525; <span>{Months[getMonthNumber(month) - 1]}大事记</span>{' '}
+                &#x1F525; <span>{Months[getMonthNumber(month)]}大事记</span>{' '}
               </h3>
               <ul className={classes.eventsList}>
                 {(events as TEvent[]).map((item, index) => (
