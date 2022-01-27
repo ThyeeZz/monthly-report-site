@@ -113,6 +113,8 @@ const BoardPreview = (props: { data: any }) => {
   const classes = useStyles();
   const { data } = props;
 
+  console.log('data--', data);
+
   const getBirthday = (date: Date | null) => {
     if (!date) {
       return '';
@@ -139,7 +141,7 @@ const BoardPreview = (props: { data: any }) => {
       <div className={classes.topSection}>
         <div className={classes.partSection}>
           <div className={classes.imgWrapper}>
-            <img src={javan} alt={data.name} />
+            <img src={data.photo || javan} alt={data.name} />
           </div>
 
           <div className={classes.infoWrapper}>
@@ -163,7 +165,7 @@ const BoardPreview = (props: { data: any }) => {
             className={classes.imgWrapper}
             style={{ borderRadius: '50%', overflow: 'hidden' }}
           >
-            <img src={javan} alt={data.heroName} />
+            <img src={data.photo || javan} alt={data.heroName} />
           </div>
 
           <div className={classes.infoWrapper}>
